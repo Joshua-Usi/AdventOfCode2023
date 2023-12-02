@@ -20,30 +20,31 @@ namespace AOC::D1
 		}
 		return sum;
 	}
-	void P1(const std::filesystem::path& input)
-	{
-		std::vector<std::string> lines = split(text_file(input).open().read_if_exists(), '\n');
-		console::log("D1P1 Answer:", SumLines(lines));
-	}
-	void P2(const std::filesystem::path& input)
-	{
-		std::unordered_map<std::string, std::string> digitMap { {"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"}, {"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"} };
-		std::vector<std::string> lines = split(text_file(input).open().read_if_exists(), '\n');
-		for (auto& line : lines)
-		{
-			size_t pos = 0;
-			for (size_t pos = 0, lowest = std::string::npos; pos != std::string::npos; pos = lowest, lowest = std::string::npos)
+	int x = []() {
+		SolutionsManager::RegisterSolution("D1P1", [](const std::filesystem::path& input) -> std::string {
+			std::vector<std::string> lines = split(text_file(input).open().read_if_exists(), '\n');
+			return std::to_string(SumLines(lines));
+		});
+		SolutionsManager::RegisterSolution("D1P2", [](const std::filesystem::path& input) -> std::string {
+			std::unordered_map<std::string, std::string> digitMap{ {"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"}, {"five", "5"}, {"six", "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"} };
+			std::vector<std::string> lines = split(text_file(input).open().read_if_exists(), '\n');
+			for (auto& line : lines)
 			{
-				std::string replacingText = "";
-				for (const auto& [name, digit] : digitMap)
+				size_t pos = 0;
+				for (size_t pos = 0, lowest = std::string::npos; pos != std::string::npos; pos = lowest, lowest = std::string::npos)
 				{
-					size_t p = line.find(name);
-					replacingText = (p < lowest) ? name : replacingText;
-					lowest = std::min(lowest, p);
+					std::string replacingText = "";
+					for (const auto& [name, digit] : digitMap)
+					{
+						size_t p = line.find(name);
+						replacingText = (p < lowest) ? name : replacingText;
+						lowest = std::min(lowest, p);
+					}
+					if (lowest != std::string::npos) line.replace(lowest, replacingText.length() - 1, digitMap[replacingText]);
 				}
-				if (lowest != std::string::npos) line.replace(lowest, replacingText.length() - 1, digitMap[replacingText]);
 			}
-		}
-		console::log("D1P2 Answer:", SumLines(lines));
-	}
+			return std::to_string(SumLines(lines));
+		});
+		return 0;
+	}();
 }
