@@ -12,7 +12,7 @@
 class SolutionsManager
 {
 public:
-	typedef std::function<std::string(const std::filesystem::path&)> Function;
+	typedef std::function<std::string(std::string&)> Function;
 private:
 	inline static std::unordered_map<std::string, Function> solutions {};
 public:
@@ -27,7 +27,8 @@ public:
 				if (solutions.find(name) != solutions.end())
 				{
 					const std::filesystem::path path = "./Inputs/D" + std::to_string(i) + ".txt";
-					cs_std::console::log(name + ":", solutions[name](path));
+					std::string input = cs_std::text_file(path).open().read_if_exists();
+					cs_std::console::log(name + ":", solutions[name](input));
 				}
 			}
 		}

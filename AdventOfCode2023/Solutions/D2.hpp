@@ -2,9 +2,9 @@
 namespace AOC::D2
 {
 	int x = []() {
-		SolutionsManager::RegisterSolution("D2P1", [](const std::filesystem::path& input) -> std::string {
+		SolutionsManager::RegisterSolution("D2P1", [](std::string& input) -> std::string {
 			std::unordered_map<std::string, uint32_t> maxCounts{ { "red", 12 }, { "green", 13 }, { "blue", 14 } };
-			std::vector<std::string> games = split(text_file(input).open().read_if_exists(), '\n');
+			std::vector<std::string> games = split(input, '\n');
 			uint32_t sum = 0;
 			for (auto& game : games)
 			{
@@ -35,8 +35,8 @@ namespace AOC::D2
 			}
 			return std::to_string(sum);
 		});
-		SolutionsManager::RegisterSolution("D2P2", [](const std::filesystem::path& input) -> std::string {
-			std::vector<std::string> games = split(text_file(input).open().read_if_exists(), '\n');
+		SolutionsManager::RegisterSolution("D2P2", [](std::string& input) -> std::string {
+			std::vector<std::string> games = split(input, '\n');
 			uint32_t sum = 0;
 			for (auto& game : games)
 			{
