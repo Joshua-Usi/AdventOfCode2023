@@ -13,6 +13,7 @@ namespace cs_std
 			result.replace(pos, delimiter.length(), replacement);
 			pos += replacement.length();
 		}
+		result.erase(std::remove(result.begin(), result.end(), '\0'), result.end());
 		return result;
 	}
 }

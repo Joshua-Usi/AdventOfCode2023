@@ -49,10 +49,11 @@ public:
 			cs_std::text_file file("./Solutions/D" + std::to_string(i) + ".hpp");
 			if (file.exists()) continue;
 
-			file.create();
+			std::string day(tp);
+			day = cs_std::replace(day, "DAY_NAME", "D" + std::to_string(i));
 
-			//std::string day(tp);
-			//day = cs_std::replace(day, "DAY_NAME", "D" + std::to_string(i));
+			file.create();
+			file.open().append(day).close();
 		}
 	}
 };

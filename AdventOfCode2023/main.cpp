@@ -5,7 +5,7 @@ using namespace cs_std;
 #include "Solutions/D2.hpp"
 #include "Solutions/D3.hpp"
 #include "Solutions/D4.hpp"
-#include "Solutions/D5.hpp"
+//#include "Solutions/D5.hpp"
 //#include "Solutions/D6.hpp"
 //#include "Solutions/D7.hpp"
 //#include "Solutions/D8.hpp"
