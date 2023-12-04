@@ -17,7 +17,7 @@ private:
 	inline static std::unordered_map<std::string, Function> solutions {};
 public:
 	static void RegisterSolution(const std::string& name, const Function& function) { solutions[name] = function; }
-	static void Run()
+	static int Run(bool useExamples = false)
 	{
 		for (uint32_t i = 1; i <= 25; i++)
 		{
@@ -26,11 +26,18 @@ public:
 				const std::string name = "D" + std::to_string(i) + "P" + std::to_string(j);
 				if (solutions.find(name) != solutions.end())
 				{
-					const std::filesystem::path path = "./Inputs/D" + std::to_string(i) + ".txt";
-					std::string input = cs_std::text_file(path).open().read_if_exists();
+					const std::filesystem::path path = "./Inputs/D" + std::to_string(i) + ((useExamples) ? "P" + std::to_string(j) + "Example" : "") + ".txt";
+
+					if (!std::filesystem::exists(path))
+					{
+						cs_std::console::log("Input file for", name, "not found.");
+						continue;
+					}
+					std::string input = cs_std::text_file(path).open().read();
 					cs_std::console::log(name + ":", solutions[name](input));
 				}
 			}
 		}
+		return 0;
 	}
 };
