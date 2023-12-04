@@ -2,7 +2,7 @@
 namespace AOC::D3
 {
 	int x = []() {
-		SolutionsManager::RegisterSolution("D3P1", [](std::string& input) -> std::string {
+		SolutionsManager::Register("D3P1", [](std::string& input) -> std::string {
 			std::vector<std::string> lines = split(input, '\n');
 			for (auto& line : lines) line += '.';
 
@@ -45,7 +45,7 @@ namespace AOC::D3
 
 			return std::to_string(sum);
 		});
-		SolutionsManager::RegisterSolution("D3P2", [](std::string& input) -> std::string {
+		SolutionsManager::Register("D3P2", [](std::string& input) -> std::string {
 			std::vector<std::string> lines = split(input, '\n');
 			for (auto& line : lines) line += '.';
 

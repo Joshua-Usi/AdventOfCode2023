@@ -3,6 +3,7 @@
 #include <array>
 #include <unordered_map>
 #include <functional>
+#include <unordered_set>
 
 #include "console.hpp"
 #include "file.hpp"
@@ -16,7 +17,7 @@ public:
 private:
 	inline static std::unordered_map<std::string, Function> solutions {};
 public:
-	static void RegisterSolution(const std::string& name, const Function& function) { solutions[name] = function; }
+	static void Register(const std::string& name, const Function& function) { solutions[name] = function; }
 	static int Run(bool useExamples = false)
 	{
 		for (uint32_t i = 1; i <= 25; i++)
@@ -39,5 +40,19 @@ public:
 			}
 		}
 		return 0;
+	}
+	static void GenerateDays()
+	{
+		std::string tp = cs_std::text_file("./Solutions/template.hpp").open().read();
+		for (uint32_t i = 1; i <= 25; i++)
+		{
+			cs_std::text_file file("./Solutions/D" + std::to_string(i) + ".hpp");
+			if (file.exists()) continue;
+
+			file.create();
+
+			//std::string day(tp);
+			//day = cs_std::replace(day, "DAY_NAME", "D" + std::to_string(i));
+		}
 	}
 };
